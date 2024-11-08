@@ -18,6 +18,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :*:@2::charliesdan1@gmail.com
 :*:@3::carlos.ramirezso@alumno.buap.mx
 :*:@4::cdanielrs21@gmail.com
+:*:@5::daniel.ramirez@ssi-schaefer.com
 :*:;tel::2228413558
 
 ;                                                           Nombres
@@ -40,6 +41,13 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :C*:;MS::MySQL
 :*?:;ss::Espíritu Santo
 :*:\blanco::‎ 
+
+;                                                           Trabajo
+:*:ssirfc::SSI010307JH1
+:*:ssirs::SCHAEFER SISTEMAS INTERNATIONAL
+:*:ssicp::06600
+
+
 
 
 ;                                                           Programación
@@ -64,13 +72,6 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 
 
 
-
-;                                                           Anclar aplicaciónes
-; Control & Space::
-; {
-;     WinSetAlwaysontop(, "A")
-; }
-
 ;                                                           PROGRAMAS
 
 :*:\tm on::
@@ -91,7 +92,13 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
         return
     }
 
-#c::
+#c:: 
+    {
+        Run '*RunAs "cmd.exe"'
+        return
+    }
+
+#+c::
     { 
         Run("Calc.exe")
         return
@@ -99,19 +106,19 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 
 #f::
     { 
-        Run("Firefox.exe")
+        runApp("Firefox")
         return
     } 
 
 #o::
     { 
-        Run("Obsidian.exe")
+        runApp("Obsidian")
         return
     } 
 
 #+a::
     { 
-        Run("Arc.exe")
+        runApp("Arc")
         return
     } 
 
@@ -121,12 +128,26 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
         return
     } 
 
+#+e::
+    { 
+        runApp("Microsoft Edge")
+        return
+    } 
+
+#+v::
+    { 
+        runApp("Visual Studio Code")
+        return
+    } 
+
 ; Function to run windows store apps
 runApp(appName) { ; https://www.autohotkey.com/boards/viewtopic.php?p=438517#p438517
     For app in ComObject('Shell.Application').NameSpace('shell:AppsFolder').Items
         (app.Name = appName) && RunWait('explorer shell:appsFolder\' app.Path)
     }
 
+
+    
     ;                                                           OBSIDIAN
 
 :*:\todo::>[{!}todo]
@@ -159,7 +180,7 @@ runApp(appName) { ; https://www.autohotkey.com/boards/viewtopic.php?p=438517#p43
 
 :*:\jx::{sc029}{sc029}{sc029}jsx title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
-:*:\ijx::{sc029}{{}jsx{}}{sc029}{LEFT}
+:*:\ijx::{sc029}{{}jsx{}}{sc029}{LEFT}                   
 
 :*:\html::{sc029}{sc029}{sc029}html title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
