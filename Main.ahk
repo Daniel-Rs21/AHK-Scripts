@@ -46,6 +46,8 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :*:ssirfc::SSI010307JH1
 :*:ssirs::SCHAEFER SISTEMAS INTERNATIONAL
 :*:ssicp::06600
+:*:gitclone::git clone "ssh://daniel.ramirez%40ssi-schaefer.com@git.ssi-schaefer.com:2501/prj/"{LEFT}
+
 
 
 
