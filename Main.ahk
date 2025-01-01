@@ -46,7 +46,9 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :*:ssirfc::SSI010307JH1
 :*:ssirs::SCHAEFER SISTEMAS INTERNATIONAL
 :*:ssicp::06600
-:*:gitclone::git clone "ssh://daniel.ramirez%40ssi-schaefer.com@git.ssi-schaefer.com:2501/prj/"{LEFT}
+:*:ssigc::git clone "ssh://daniel.ramirez%40ssi-schaefer.com@git.ssi-schaefer.com:2501/prj/"{LEFT}
+:*:ssiusr::dnramirez
+:*:ssipass::Ammonium95Overcook7{!}Monogram7
 
 
 
@@ -94,13 +96,19 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
         return
     }
 
+:*:\num on::
+    { 
+        Run("`"C:\Users\MXPUE212\Documents\AHK-Scripts\Copiado.ahk`"")
+        return
+    }
+
 #c:: 
     {
         Run '*RunAs "cmd.exe"'
         return
     }
 
-#+c::
+#^c::
     { 
         Run("Calc.exe")
         return
@@ -162,37 +170,37 @@ runApp(appName) { ; https://www.autohotkey.com/boards/viewtopic.php?p=438517#p43
 
 :*:\caption::>[{!}caption]{ENTER}{SPACE}
 
-:*:\code::{sc029}{sc029}{sc029} title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}{UP}
+:*:\code::{sc029}{sc029}{sc029}{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}{UP}
 
 :*:\icode::> [{!}code]{SPACE}
 
-:*:\sql::{sc029}{sc029}{sc029}sql title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\sql::{sc029}{sc029}{sc029}sql{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
 :*:\isql::{sc029}{{}sql{}}{sc029}{LEFT}
 
-:*:\java::{sc029}{sc029}{sc029}java title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\java::{sc029}{sc029}{sc029}java{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
-:*:\py::{sc029}{sc029}{sc029}python title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\py::{sc029}{sc029}{sc029}python{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
 :*:\ipy::{sc029}{{}python{}}{sc029}{LEFT}
 
-:*:\js::{sc029}{sc029}{sc029}js title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\js::{sc029}{sc029}{sc029}js{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
 :*:\ijs::{sc029}{{}js{}}{sc029}{LEFT}
 
-:*:\jx::{sc029}{sc029}{sc029}jsx title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\jx::{sc029}{sc029}{sc029}jsx{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
 :*:\ijx::{sc029}{{}jsx{}}{sc029}{LEFT}                   
 
-:*:\html::{sc029}{sc029}{sc029}html title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\html::{sc029}{sc029}{sc029}html{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
 :*:\ihtml::{sc029}{{}html{}}{sc029}{LEFT}
 
-:*:\css::{sc029}{sc029}{sc029}css title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\css::{sc029}{sc029}{sc029}css{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
 :*:\icss::{sc029}{{}css{}}{sc029}{LEFT}
 
-:*:\shell::{sc029}{sc029}{sc029}shell title:""{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\shell::{sc029}{sc029}{sc029}shell{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
 
 :*:\ishell::{sc029}{{}shell{}}{sc029}{LEFT}
 
