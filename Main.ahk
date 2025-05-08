@@ -43,13 +43,17 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :*:\blanco::‎ 
 
 ;                                                           Trabajo
-:*:ssirfc::SSI010307JH1
-:*:ssirs::SCHAEFER SISTEMAS INTERNATIONAL
-:*:ssicp::06600
-:*:ssigc::git clone "ssh://daniel.ramirez%40ssi-schaefer.com@git.ssi-schaefer.com:2501/prj/"{LEFT}
-:*:ssiusr::dnramirez
+:*?:ssirfc::SSI010307JH1
+:*?:ssirs::SCHAEFER SISTEMAS INTERNATIONAL
+:*?:ssicp::06600
+:*?:ssigc::git clone "ssh://daniel.ramirez%40ssi-schaefer.com@git.ssi-schaefer.com:2501/prj/"{LEFT}
+:*?:ssigp::git push origin HEAD:refs/for/master
+:*?:ssiusr::dnramirez
 :*:ssipass::Ammonium95Overcook7{!}Monogram7
-
+:*?:\\wksp::cd /media/c/Users/MXPUE212/Workspaces
+:*?:\\botic::cd /media/c/Users/MXPUE212/Workspaces/18_4-Boticario/wamas/mfs/com.wamas.acx4.mfs
+:*?:\\gutis::cd /media/c/Users/MXPUE212/Workspaces/18_4-Gutis/wamas/mfs/com.wamas.acx4.mfs
+:*?:\\camac::cd /media/c/Users/MXPUE212/Workspaces/18_7-Boticario_Camacari/wamas/mfs/com.wamas.acx4.mfs
 
 
 
@@ -84,11 +88,11 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
         return
     }
 
-:*:\bot::
-    { 
-        Run("`"C:\Users\Daniel Rs\OneDrive\Documents\AHK\Bot.ahk`"")
-        return
-    }
+;:*:\bot::
+;    { 
+;        Run("`"C:\Users\Daniel Rs\OneDrive\Documents\AHK\Bot.ahk`"")
+;        return
+;    }
 
 :*:\kmouse::
     { 
@@ -96,7 +100,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
         return
     }
 
-:*:\num on::
+:*?:\num on::
     { 
         Run("`"C:\Users\MXPUE212\Documents\AHK-Scripts\Copiado.ahk`"")
         return

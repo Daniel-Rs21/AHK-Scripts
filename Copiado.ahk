@@ -128,6 +128,38 @@ global paso1 := 1
     }
 }
 
+
+global contador5 := 1 ; Variable global para el contador
+global prefijo2 := ""
+
+^q:: { ; Ctrl + V para pegar el texto
+    global contador5, prefijo2
+
+    ; Mostrar InputBox solo la primera vez que se presiona Ctrl + V
+    if (contador5 = 1) {
+        result := InputBox("Ingrese el número inicial:", "Contador Inicial", "", "1") ; Valor predeterminado
+        if (result.Result != "OK") { ; Si el usuario cancela
+            MsgBox("Script cancelado.")
+            ExitApp
+        } else {
+            contador5 := result.Value ; Asignar el valor ingresado
+        }
+
+        result := InputBox("Ingrese el prefijo:", "Contador Inicial", "", "") ; Valor predeterminado
+        if (result.Result != "OK") { ; Si el usuario cancela
+            MsgBox("Script cancelado.")
+            ExitApp
+        } else {
+            prefijo2 := result.Value ; Asignar el valor ingresado
+        }
+    }
+
+    ; Pegar el texto con formato
+    texto := Format("{}{:02}", prefijo2, contador5) ; Asegura tres dígitos
+    SendInput(texto)
+    contador5 += 1
+}
+
 :*:\num off::
 {
     ExitApp
