@@ -19,6 +19,7 @@ SetControlDelay -1
 ;include the library
 #Include %A_LineFile%\..\VD.ahk
 
+
 ;#useful stuff
 VD.animation_on := false
 !+1:: {
@@ -83,57 +84,6 @@ VD.animation_on := false
     }
 }
 
-$>^f:: return
-$f:: {
-    trigger := "f"
-    modifier := "RControl "
-    SendInput(trigger)
-    if (!KeyWait(trigger, "T0.30")) {
-        SendInput("{BackSpace}")
-        Send "{" modifier " down}"
-        KeyWait(trigger)
-        Send "{" modifier " up}"
-    }
-}
-
-$>+d:: return
-$d:: {
-    trigger := "d"
-    modifier := "RShift "
-    SendInput(trigger)
-    if (!KeyWait(trigger, "T0.3")) {
-        SendInput("{BackSpace}")
-        Send "{" modifier " down}"
-        KeyWait(trigger)
-        Send "{" modifier " up}"
-    }
-}
-
-$>!s:: return
-$s:: {
-    trigger := "s"
-    modifier := "RAlt "
-    SendInput(trigger)
-    if (!KeyWait(trigger, "T0.3")) {
-        SendInput("{BackSpace}")
-        Send "{" modifier " down}"
-        KeyWait(trigger)
-        Send "{" modifier " up}"
-    }
-}
-
-$>#a:: return
-$a:: {
-    trigger := "a"
-    modifier := "RWin "
-    SendInput(trigger)
-    if (!KeyWait(trigger, "T0.3")) {
-        SendInput("{BackSpace}")
-        Send "{" modifier " down}"
-        KeyWait(trigger)
-        Send "{" modifier " up}"
-    }
-}
 
 ;                                                           REEMPLAZOS
 
