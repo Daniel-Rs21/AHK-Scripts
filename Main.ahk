@@ -1,11 +1,142 @@
-﻿; REMOVED: #NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
+; REMOVED: #NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode("Input") ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 
+;#SETUP START
+#SingleInstance force
+ListLines 0
+SendMode "Input"
+SetWorkingDir A_ScriptDir
+KeyHistory 0
+#WinActivateForce
+
+ProcessSetPriority "H"
+
+SetWinDelay -1
+SetControlDelay -1
+
+;include the library
+#Include %A_LineFile%\..\VD.ahk
+
+;#useful stuff
+VD.animation_on := false
+!+1:: {
+    name := VD.getNameFromDesktopNum(4)
+    VD.goToDesktopNum(1)
+}
+!+2:: VD.goToDesktopNum(2)
+!+3:: VD.goToDesktopNum(3)
+!+4:: VD.goToDesktopNum(4)
+!+5:: VD.goToDesktopNum(5)
+!+6:: VD.goToDesktopNum(6)
+!+7:: VD.goToDesktopNum(7)
+!+8:: VD.goToDesktopNum(8)
+!+9:: VD.goToDesktopNum(9)
+
+;follow your window
+
+; wrapping / cycle back to first desktop when at the last
+^#left:: VD.goToRelativeDesktopNum(-1)
+^#right:: VD.goToRelativeDesktopNum(+1)
+
+; move window to left and follow it
+#!left:: VD.MoveWindowToRelativeDesktopNum("A", -1).follow()
+; move window to right and follow it
+#!right:: VD.MoveWindowToRelativeDesktopNum("A", 1).follow()
+
+; move window to left
+^#!left:: VD.MoveWindowToRelativeDesktopNum("A", -1)
+; move window to right
+^#!right:: VD.MoveWindowToRelativeDesktopNum("A", 1)
+
+;Create/Remove Desktop
+#!=:: VD.createDesktop(true) ;go to newly created
+#!-:: VD.removeDesktop(VD.getCurrentDesktopNum())
+
+#f2:: {
+
+    name := InputBox("Nombre:", "Renombrar Escritorio", "", "") ; Valor predeterminado
+    if (name.Result != "OK") { ; Si el usuario cancela
+    } else {
+        VD.setNameToDesktopNum(name.value, 1)
+    }
+}
+
+;Pin Window
+!0:: VD.TogglePinWindow("A")
+!+0:: {
+    if (VD.IsWindowPinned("A") = 1) {
+        MsgBox "Pinned Windows"
+    } else {
+        MsgBox "Unpinned Windows"
+    }
+}
+
+;Pin App
+!\:: VD.TogglePinExe("A")
+!+\:: {
+    if (VD.IsExePinned("A") = 1) {
+        MsgBox "Pinned App"
+    } else {
+        MsgBox "Unpinned App"
+    }
+}
+
+$>^f:: return
+$f:: {
+    trigger := "f"
+    modifier := "RControl "
+    SendInput(trigger)
+    if (!KeyWait(trigger, "T0.30")) {
+        SendInput("{BackSpace}")
+        Send "{" modifier " down}"
+        KeyWait(trigger)
+        Send "{" modifier " up}"
+    }
+}
+
+$>+d:: return
+$d:: {
+    trigger := "d"
+    modifier := "RShift "
+    SendInput(trigger)
+    if (!KeyWait(trigger, "T0.3")) {
+        SendInput("{BackSpace}")
+        Send "{" modifier " down}"
+        KeyWait(trigger)
+        Send "{" modifier " up}"
+    }
+}
+
+$>!s:: return
+$s:: {
+    trigger := "s"
+    modifier := "RAlt "
+    SendInput(trigger)
+    if (!KeyWait(trigger, "T0.3")) {
+        SendInput("{BackSpace}")
+        Send "{" modifier " down}"
+        KeyWait(trigger)
+        Send "{" modifier " up}"
+    }
+}
+
+$>#a:: return
+$a:: {
+    trigger := "a"
+    modifier := "RWin "
+    SendInput(trigger)
+    if (!KeyWait(trigger, "T0.3")) {
+        SendInput("{BackSpace}")
+        Send "{" modifier " down}"
+        KeyWait(trigger)
+        Send "{" modifier " up}"
+    }
+}
+
 ;                                                           REEMPLAZOS
 
-;                                                           Acentos
 :*?:;a::á
 :*?:;e::é
 :*?:;i::í
@@ -40,7 +171,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :*:;jsn::Node.js
 :C*:;MS::MySQL
 :*?:;ss::Espíritu Santo
-:*:\blanco::‎ 
+:*:\blanco::‎
 
 ;                                                           Trabajo
 :*?:ssirfc::SSI010307JH1
@@ -51,12 +182,10 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :*?:ssiusr::dnramirez
 :*:ssipass::Ammonium95Overcook7{!}Monogram7
 :*?:\\wksp::cd /media/c/Users/MXPUE212/Workspaces
+:*?:\\log::cd wamas/mfs/com.wamas.acx4.mfs/log
 :*?:\\botic::cd /media/c/Users/MXPUE212/Workspaces/18_4-Boticario/wamas/mfs/com.wamas.acx4.mfs
 :*?:\\gutis::cd /media/c/Users/MXPUE212/Workspaces/18_4-Gutis/wamas/mfs/com.wamas.acx4.mfs
 :*?:\\camac::cd /media/c/Users/MXPUE212/Workspaces/18_7-Boticario_Camacari/wamas/mfs/com.wamas.acx4.mfs
-
-
-
 
 ;                                                           Programación
 
@@ -78,153 +207,104 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 :*:\sci::npm i styled-components
 :*:\e2f::<link rel="icon"href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22> </text></svg>"/>
 
-
-
 ;                                                           PROGRAMAS
 
-:*:\tm on::
-    { 
-        Run("`"C:\Users\Daniel Rs\OneDrive\Documents\AHK\Texmaker.ahk`"")
-        return
-    }
-
-;:*:\bot::
-;    { 
-;        Run("`"C:\Users\Daniel Rs\OneDrive\Documents\AHK\Bot.ahk`"")
-;        return
-;    }
-
-:*:\kmouse::
-    { 
-        Run("`"C:\Users\Daniel Rs\OneDrive\Documents\AHK\Mouse.ahk`"")
-        return
-    }
-
 :*?:\num on::
-    { 
-        Run("`"C:\Users\MXPUE212\Documents\AHK-Scripts\Copiado.ahk`"")
-        return
-    }
+{
+    Run("`"C:\Users\MXPUE212\Documents\AHK-Scripts\Copiado.ahk`"")
+    return
+}
 
-#c:: 
-    {
-        Run '*RunAs "cmd.exe"'
-        return
-    }
+#c::
+{
+    Run '*RunAs "cmd.exe"'
+    return
+}
 
 #^c::
-    { 
-        Run("Calc.exe")
-        return
-    } 
+{
+    Run("Calc.exe")
+    return
+}
 
 #f::
-    { 
-        runApp("Firefox")
-        return
-    } 
+{
+    VD.runApp("Firefox")
+    return
+}
 
 #o::
-    { 
-        runApp("Obsidian")
-        return
-    } 
-
-#+a::
-    { 
-        runApp("Arc")
-        return
-    } 
+{
+    VD.runApp("Obsidian")
+    return
+}
 
 #+w::
-    { 
-        runApp("WhatsApp")
-        return
-    } 
-
-#+e::
-    { 
-        runApp("Microsoft Edge")
-        return
-    } 
+{
+    VD.runApp("WhatsApp")
+    return
+}
 
 #+v::
-    { 
-        runApp("Visual Studio Code")
-        return
-    } 
+{
+    VD.runApp("Visual Studio Code")
+    return
+}
 
-; Function to run windows store apps
-runApp(appName) { ; https://www.autohotkey.com/boards/viewtopic.php?p=438517#p438517
-    For app in ComObject('Shell.Application').NameSpace('shell:AppsFolder').Items
-        (app.Name = appName) && RunWait('explorer shell:appsFolder\' app.Path)
-    }
+;                                                           OBSIDIAN
 
+:*:\sec::[[{^}]]{LEFT 2}
 
-    
-    ;                                                           OBSIDIAN
-
-:*:\todo::>[{!}todo]
-
-:*:\importante::>[{!}warning] Importante
-
-:*:\notas::>[{!}note] Notas
+:*:\head::[[{#}]]{LEFT 2}
 
 :*:\callout::>[{!}]{LEFT}
 
 :*:\caption::>[{!}caption]{ENTER}{SPACE}
 
-:*:\code::{sc029}{sc029}{sc029}{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}{UP}
+:*:\code::{sc029 3}{ENTER 2}{sc029 3}{UP 2}
 
 :*:\icode::> [{!}code]{SPACE}
 
-:*:\sql::{sc029}{sc029}{sc029}sql{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\sql::{sc029 3}sql{ENTER 2}{sc029 3}{UP}
 
 :*:\isql::{sc029}{{}sql{}}{sc029}{LEFT}
 
-:*:\java::{sc029}{sc029}{sc029}java{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\java::{sc029 3}java{ENTER 2}{sc029 3}{UP}
 
-:*:\py::{sc029}{sc029}{sc029}python{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\py::{sc029 3}python{ENTER 2}{sc029 3}{UP}
 
 :*:\ipy::{sc029}{{}python{}}{sc029}{LEFT}
 
-:*:\js::{sc029}{sc029}{sc029}js{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\js::{sc029 3}js{ENTER 2}{sc029 3}{UP}
 
 :*:\ijs::{sc029}{{}js{}}{sc029}{LEFT}
 
-:*:\jx::{sc029}{sc029}{sc029}jsx{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\jx::{sc029 3}jsx{ENTER 2}{sc029 3}{UP}
 
-:*:\ijx::{sc029}{{}jsx{}}{sc029}{LEFT}                   
+:*:\ijx::{sc029}{{}jsx{}}{sc029}{LEFT}
 
-:*:\html::{sc029}{sc029}{sc029}html{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\html::{sc029 3}html{ENTER 2}{sc029 3}{UP}
 
 :*:\ihtml::{sc029}{{}html{}}{sc029}{LEFT}
 
-:*:\css::{sc029}{sc029}{sc029}css{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\css::{sc029 3}css{ENTER 2}{sc029 3}{UP}
 
 :*:\icss::{sc029}{{}css{}}{sc029}{LEFT}
 
-:*:\shell::{sc029}{sc029}{sc029}shell{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\shell::{sc029 3}shell{ENTER 2}{sc029 3}{UP}
 
 :*:\ishell::{sc029}{{}shell{}}{sc029}{LEFT}
 
-:*:\res::{sc029}{sc029}{sc029}shell title:"Resultado"{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\res::{sc029 3}shell title:"Resultado"{ENTER 2}{sc029 3}{UP}
 
-:*:\dv::{sc029}{sc029}{sc029}dataview{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\dv::{sc029 3}dataview{ENTER 2}{sc029 3}{UP}
 
-:*:\jdv::{sc029}{sc029}{sc029}dataviewjs{ENTER}{ENTER}{sc029}{sc029}{sc029}{UP}
+:*:\jdv::{sc029 3}dataviewjs{ENTER 2}{sc029 3}{UP}
 
-:*:/bc::/*  */{LEFT}{LEFT}{LEFT}
+::/bc::/* */{LEFT 3}
 
 :*:\multic::>[{!}multi-column]{ENTER}{SPACE}
 
-:*:\col::>[{!}column]{SPACE}
-
-:*:\clases::>[{!}clases]{SPACE}
-
 :*:\bcol::>[{!}blank-column]{ENTER}{SPACE}
 
-:*:\2col::>[{!}multi-column]{ENTER}{SPACE}>[{!}column]{ENTER}{SPACE}a{ENTER}{ENTER}>[{!}column]{ENTER}{SPACE}
-
-:*:\2bcol::>[{!}multi-column]{ENTER}{SPACE}>[{!}blank-column]{ENTER}{SPACE}a{ENTER}{ENTER}>[{!}blank-column]{ENTER}{SPACE}
-
+:*:\2bcol::>[{!}multi-column]{ENTER}{SPACE}>[{!}blank-column]{ENTER}{SPACE}a{ENTER 2}>[{!}blank-column]{ENTER}{SPACE}
