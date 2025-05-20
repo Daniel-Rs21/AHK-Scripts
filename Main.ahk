@@ -19,6 +19,8 @@ SetControlDelay -1
 ;include the library
 #Include %A_LineFile%\..\VD.ahk
 
+
+
 ;#useful stuff
 VD.animation_on := false
 !+1:: {
